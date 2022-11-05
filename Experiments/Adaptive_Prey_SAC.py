@@ -221,7 +221,7 @@ if __name__ == "__main__":
     else:
         seed = args.seed
         assert isinstance(seed,int)
-        
+    print(f'seed:{seed}')
     #==========================================================================
     main(n_parallel=args.n_parallel, budget=args.budget, n_rl_itr=args.n_rl_itr,
          n_cont_samples=args.n_contr_samples, seed=seed,
