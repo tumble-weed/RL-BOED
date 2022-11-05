@@ -185,6 +185,7 @@ def main(n_parallel=1, budget=1, n_rl_itr=1, n_cont_samples=10, seed=0,
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--id", default="1", type=int)
+    parser.add_argument("--seed", default=None, type=int)
     parser.add_argument("--n-parallel", default="100", type=int)
     parser.add_argument("--budget", default="10", type=int)
     parser.add_argument("--n-rl-itr", default="1000", type=int)
@@ -214,8 +215,15 @@ if __name__ == "__main__":
     target_entropy = args.target_entropy if args.target_entropy >= 0 else None
     buff_cap = int(args.buffer_capacity)
     log_info = f"input params: {vars(args)}"
+    #==========================================================================
+    if args.seed is None:
+        seed=seeds[exp_id - 1]
+    else:
+        assert isinstance(seed,int)
+        seed = args.seed
+    #==========================================================================
     main(n_parallel=args.n_parallel, budget=args.budget, n_rl_itr=args.n_rl_itr,
-         n_cont_samples=args.n_contr_samples, seed=seeds[exp_id - 1],
+         n_cont_samples=args.n_contr_samples, seed=seed,
          log_dir=args.log_dir, snapshot_mode=args.snapshot_mode, tau=args.tau,
          snapshot_gap=args.snapshot_gap, bound_type=bound_type,
          src_filepath=args.src_filepath, discount=args.discount, alpha=alpha,

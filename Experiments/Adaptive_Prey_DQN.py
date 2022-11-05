@@ -142,6 +142,7 @@ def main(n_parallel=1, budget=1, n_rl_itr=1, n_cont_samples=10, seed=0,
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--id", default="1", type=int)
+    parser.add_argument("--seed", default=None, type=int)
     parser.add_argument("--n-parallel", default="100", type=int)
     parser.add_argument("--budget", default="25", type=int)
     parser.add_argument("--n-rl-itr", default="1000", type=int)
@@ -164,6 +165,13 @@ if __name__ == "__main__":
     buff_cap = int(args.buffer_capacity)
     tau = args.tau if args.tau >= 0 else None
     log_info = f"input params: {vars(args)}"
+    #==========================================================================
+    if args.seed is None:
+        seed=seeds[exp_id - 1]
+    else:
+        assert isinstance(seed,int)
+        seed = args.seed
+    #==========================================================================    
     main(n_parallel=args.n_parallel, budget=args.budget, n_rl_itr=args.n_rl_itr,
          n_cont_samples=args.n_contr_samples, seed=seeds[exp_id - 1],
          log_dir=args.log_dir, snapshot_mode=args.snapshot_mode,
