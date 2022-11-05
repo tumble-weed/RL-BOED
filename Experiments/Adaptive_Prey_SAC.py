@@ -219,8 +219,9 @@ if __name__ == "__main__":
     if args.seed is None:
         seed=seeds[exp_id - 1]
     else:
-        assert isinstance(seed,int)
         seed = args.seed
+        assert isinstance(seed,int)
+        
     #==========================================================================
     main(n_parallel=args.n_parallel, budget=args.budget, n_rl_itr=args.n_rl_itr,
          n_cont_samples=args.n_contr_samples, seed=seed,
