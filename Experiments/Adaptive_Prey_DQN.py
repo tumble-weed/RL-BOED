@@ -164,14 +164,15 @@ if __name__ == "__main__":
     exp_id = args.id
     buff_cap = int(args.buffer_capacity)
     tau = args.tau if args.tau >= 0 else None
-    log_info = f"input params: {vars(args)}"
     #==========================================================================
     if args.seed is None:
         seed=seeds[exp_id - 1]
     else:
-        assert isinstance(seed,int)
         seed = args.seed
-    #==========================================================================    
+        assert isinstance(seed,int)
+
+    #==========================================================================
+    log_info = f"input params: {vars(args)}\nseed:{seed}"
     main(n_parallel=args.n_parallel, budget=args.budget, n_rl_itr=args.n_rl_itr,
          n_cont_samples=args.n_contr_samples, seed=seeds[exp_id - 1],
          log_dir=args.log_dir, snapshot_mode=args.snapshot_mode,
