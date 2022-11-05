@@ -214,14 +214,13 @@ if __name__ == "__main__":
     alpha = args.alpha if args.alpha >= 0 else None
     target_entropy = args.target_entropy if args.target_entropy >= 0 else None
     buff_cap = int(args.buffer_capacity)
-    log_info = f"input params: {vars(args)}"
+    log_info = f"input params: {vars(args)}\nseed:{seed}"
     #==========================================================================
     if args.seed is None:
         seed=seeds[exp_id - 1]
     else:
         seed = args.seed
         assert isinstance(seed,int)
-    print(f'seed:{seed}')
     #==========================================================================
     main(n_parallel=args.n_parallel, budget=args.budget, n_rl_itr=args.n_rl_itr,
          n_cont_samples=args.n_contr_samples, seed=seed,
